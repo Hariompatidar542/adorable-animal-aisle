@@ -1,9 +1,6 @@
-
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
-
 export const Footer = () => {
-  return (
-    <footer className="bg-gray-50 pt-16 pb-8">
+  return <footer className="bg-gray-50 pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -12,13 +9,13 @@ export const Footer = () => {
               <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">🐾</span>
               </div>
-              <h3 className="text-xl font-bold text-primary">PetStore</h3>
+              <h3 className="text-xl font-bold text-amber-800">PetStore</h3>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-slate-950">
               Your trusted partner in pet care. We provide premium products 
               to keep your furry friends happy and healthy.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 bg-slate-50">
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                 <span className="text-white text-sm">f</span>
               </div>
@@ -87,6 +84,5 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
