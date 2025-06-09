@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useOrders } from '@/hooks/useOrders';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,6 +16,7 @@ import { toast } from '@/hooks/use-toast';
 const Checkout = () => {
   const { items, total, clearCart } = useCart();
   const { user } = useAuth();
+  const { createOrder, isCreating } = useOrders();
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -27,8 +29,6 @@ const Checkout = () => {
     paymentMethod: 'cod',
     notes: ''
   });
-
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -46,27 +46,28 @@ const Checkout = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsProcessing(true);
 
     try {
-      // Simulate order processing
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await createOrder(formData, items, total);
       
-      clearCart();
-      toast({
-        title: "Order Placed Successfully!",
-        description: `Your order has been confirmed. ${formData.paymentMethod === 'cod' ? 'You will pay on delivery.' : 'Payment processed successfully.'}`
-      });
-      
-      navigate('/order-success');
+      if (result.success) {
+        clearCart();
+        toast({
+          title: "Order Placed Successfully!",
+          description: `Your order ${result.order?.order_number} has been confirmed. ${formData.paymentMethod === 'cod' ? 'You will pay on delivery.' : 'Payment processed successfully.'}`
+        });
+        
+        navigate('/order-success');
+      } else {
+        throw new Error('Failed to create order');
+      }
     } catch (error) {
+      console.error('Order creation error:', error);
       toast({
         title: "Order Failed",
         description: "There was an error processing your order. Please try again.",
         variant: "destructive"
       });
-    } finally {
-      setIsProcessing(false);
     }
   };
 
@@ -296,9 +297,9 @@ const Checkout = () => {
                 type="submit"
                 className="w-full gradient-primary text-white hover:opacity-90"
                 size="lg"
-                disabled={isProcessing}
+                disabled={isCreating}
               >
-                {isProcessing ? 'Processing...' : 'Place Order'}
+                {isCreating ? 'Processing Order...' : 'Place Order'}
               </Button>
             </form>
           </div>
