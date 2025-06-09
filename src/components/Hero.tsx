@@ -1,10 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Sparkles, Star } from 'lucide-react';
-
 export const Hero = () => {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 min-h-screen flex items-center">
+  return <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 min-h-screen flex items-center">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 blob-shape animate-pulse"></div>
@@ -35,7 +32,7 @@ export const Hero = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl group">
+              <Button size="lg" className="gradient-primary hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl group text-slate-900">
                 Shop Now
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -70,11 +67,7 @@ export const Hero = () => {
             <div className="relative">
               {/* Main image container */}
               <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 p-8 modern-shadow">
-                <img 
-                  src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80" 
-                  alt="Happy pets" 
-                  className="w-full h-full object-cover rounded-2xl floating-element" 
-                />
+                <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80" alt="Happy pets" className="w-full h-full object-cover rounded-2xl floating-element" />
               </div>
               
               {/* Floating elements with modern styling */}
@@ -91,6 +84,5 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
