@@ -52,8 +52,8 @@ export const useOrderTracking = () => {
       // Transform the data to match our OrderDetails interface
       const transformedOrders: OrderDetails[] = (data || []).map(order => ({
         ...order,
-        estimated_delivery_date: order.estimated_delivery_date || null,
-        tracking_number: order.tracking_number || null,
+        estimated_delivery_date: null, // Set default since field doesn't exist yet
+        tracking_number: null, // Set default since field doesn't exist yet
       }));
       
       setOrders(transformedOrders);
@@ -66,16 +66,58 @@ export const useOrderTracking = () => {
 
   const fetchOrderStatusHistory = async (orderId: string): Promise<OrderStatusHistory[]> => {
     try {
-      // Use a raw SQL query since the TypeScript types haven't been updated yet
-      const { data, error } = await supabase.rpc('get_order_status_history', {
-        order_id: orderId
-      });
+      // Since the order_status_history table and function don't exist yet,
+      // return a mock status based on the current order status
+      const { data: order, error } = await supabase
+        .from('orders')
+        .select('status, created_at')
+        .eq('id', orderId)
+        .single();
 
       if (error) {
-        console.error('Error fetching order status history:', error);
+        console.error('Error fetching order:', error);
         return [];
       }
-      return data || [];
+
+      // Return a simple status history based on current status
+      const statusHistory: OrderStatusHistory[] = [
+        {
+          id: `${orderId}-pending`,
+          status: 'pending',
+          created_at: order.created_at,
+          notes: 'Order placed successfully'
+        }
+      ];
+
+      // Add more statuses based on current status
+      if (['processing', 'shipped', 'delivered'].includes(order.status)) {
+        statusHistory.push({
+          id: `${orderId}-processing`,
+          status: 'processing',
+          created_at: order.created_at,
+          notes: 'Order is being processed'
+        });
+      }
+
+      if (['shipped', 'delivered'].includes(order.status)) {
+        statusHistory.push({
+          id: `${orderId}-shipped`,
+          status: 'shipped',
+          created_at: order.created_at,
+          notes: 'Order has been shipped'
+        });
+      }
+
+      if (order.status === 'delivered') {
+        statusHistory.push({
+          id: `${orderId}-delivered`,
+          status: 'delivered',
+          created_at: order.created_at,
+          notes: 'Order has been delivered'
+        });
+      }
+
+      return statusHistory;
     } catch (error) {
       console.error('Error fetching order status history:', error);
       return [];
@@ -96,8 +138,8 @@ export const useOrderTracking = () => {
       // Transform the data to match our OrderDetails interface
       const transformedOrder: OrderDetails = {
         ...data,
-        estimated_delivery_date: data.estimated_delivery_date || null,
-        tracking_number: data.tracking_number || null,
+        estimated_delivery_date: null, // Set default since field doesn't exist yet
+        tracking_number: null, // Set default since field doesn't exist yet
       };
       
       return transformedOrder;
