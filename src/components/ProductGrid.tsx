@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { useProducts } from '@/hooks/useProducts';
+import { Sparkles } from 'lucide-react';
 
 const categories = ['All', 'Dogs', 'Cats', 'Birds', 'Fish'];
 
@@ -26,13 +27,13 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gradient-to-b from-white to-purple-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Featured <span className="text-primary">Products</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              Featured <span className="text-gradient">Products</span>
             </h2>
-            <p className="max-w-2xl mx-auto text-gray-950">
+            <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
               Discover our carefully curated selection of premium pet products, 
               designed to keep your furry friends happy and healthy.
             </p>
@@ -40,11 +41,11 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-muted h-48 rounded-t-lg"></div>
-                <div className="p-4 bg-card rounded-b-lg">
-                  <div className="h-4 bg-muted rounded mb-2"></div>
-                  <div className="h-3 bg-muted rounded mb-4"></div>
-                  <div className="h-10 bg-muted rounded"></div>
+                <div className="bg-gray-200 h-48 rounded-t-3xl"></div>
+                <div className="p-6 bg-white rounded-b-3xl modern-shadow">
+                  <div className="h-4 bg-gray-200 rounded mb-3"></div>
+                  <div className="h-3 bg-gray-200 rounded mb-4"></div>
+                  <div className="h-12 bg-gray-200 rounded-2xl"></div>
                 </div>
               </div>
             ))}
@@ -55,20 +56,24 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 bg-gradient-to-b from-white to-purple-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Featured <span className="text-primary">Products</span>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-purple-100 rounded-full px-4 py-2 text-sm font-medium text-purple-700 mb-4">
+            <Sparkles className="w-4 h-4" />
+            Premium Collection
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            Featured <span className="text-gradient">Products</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-950">
+          <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
             Discover our carefully curated selection of premium pet products, 
             designed to keep your furry friends happy and healthy.
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* Enhanced Category Filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
           {categories.map(category => (
             <Button
               key={category}
@@ -79,17 +84,17 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
               }}
               className={`${
                 activeCategory === category 
-                  ? 'gradient-primary text-white' 
-                  : 'hover:bg-muted/50'
-              } transition-all duration-200`}
+                  ? 'gradient-primary text-white shadow-lg' 
+                  : 'border-purple-200 hover:border-purple-300 hover:bg-purple-50'
+              } transition-all duration-300 rounded-full px-6 py-2 font-medium`}
             >
               {category}
             </Button>
           ))}
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {/* Enhanced Product Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {displayedProducts.map((product, index) => (
             <ProductCard
               key={product.id}
@@ -111,14 +116,14 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           ))}
         </div>
 
-        {/* Load More Button */}
+        {/* Enhanced Load More Button */}
         {visibleProducts < filteredProducts.length && (
           <div className="text-center">
             <Button
               variant="outline"
               size="lg"
               onClick={() => setVisibleProducts(prev => prev + 6)}
-              className="hover:bg-muted/50"
+              className="border-purple-200 hover:border-purple-300 hover:bg-purple-50 rounded-full px-8 py-3 font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Load More Products
             </Button>
