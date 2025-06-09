@@ -3,6 +3,7 @@ import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useCart } from '../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 interface CartProps {
   isOpen: boolean;
@@ -11,6 +12,12 @@ interface CartProps {
 
 export const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    onClose();
+    navigate('/checkout');
+  };
 
   if (!isOpen) return null;
 
@@ -103,6 +110,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
               </div>
               <div className="space-y-2">
                 <Button 
+                  onClick={handleCheckout}
                   className="w-full gradient-primary text-white hover:opacity-90"
                   size="lg"
                 >
