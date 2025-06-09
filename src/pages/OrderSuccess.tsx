@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -48,20 +47,19 @@ const OrderSuccess = () => {
 
         <div className="space-y-4">
           <Button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/track-order')}
             className="gradient-primary text-white"
             size="lg"
           >
-            Continue Shopping
+            Track Your Order
           </Button>
           
-          {/* In a real app, this would link to an order tracking page */}
           <Button
-            variant="outline"
             onClick={() => navigate('/')}
+            variant="outline"
             size="lg"
           >
-            Track Your Order
+            Continue Shopping
           </Button>
         </div>
       </div>

@@ -39,6 +39,12 @@ export const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Home</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Products</a>
+              <button 
+                onClick={() => navigate('/track-order')}
+                className="text-gray-700 hover:text-primary transition-colors"
+              >
+                Track Order
+              </button>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">About</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Contact</a>
             </nav>
