@@ -67,7 +67,7 @@ export const Hero = () => {
             <div className="relative">
               {/* Main image container */}
               <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 p-8 modern-shadow">
-                <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80" alt="Happy pets" className="w-full h-full object-cover rounded-2xl floating-element" />
+                <img alt="Happy pets" src="/lovable-uploads/f6b74500-6eec-4bc8-a25d-2db13eb5803e.png" className="w-full h-full rounded-2xl floating-element object-fill" />
               </div>
               
               {/* Floating elements with modern styling */}
