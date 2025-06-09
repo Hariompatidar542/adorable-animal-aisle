@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { Product, ProductInput } from '@/hooks/useProducts';
 
 interface ProductFormProps {
@@ -89,15 +90,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="image">Image URL</Label>
-            <Input
-              id="image"
-              value={formData.image}
-              onChange={(e) => handleChange('image', e.target.value)}
-              placeholder="https://..."
-            />
-          </div>
+          <ImageUpload
+            value={formData.image}
+            onChange={(value) => handleChange('image', value)}
+            disabled={isLoading}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
