@@ -1,10 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart } from 'lucide-react';
-
 export const Hero = () => {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-orange-50">
+  return <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-orange-50">
       <div className="container mx-auto px-4 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -15,7 +12,7 @@ export const Hero = () => {
                 <span className="text-primary block">Furry Friends</span>
                 <span className="text-secondary">Need</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-md">
+              <p className="text-lg max-w-md text-gray-950">
                 Discover premium pet products, from nutritious food to fun toys. 
                 Because every pet deserves the best care and love.
               </p>
@@ -52,11 +49,7 @@ export const Hero = () => {
           {/* Hero Image */}
           <div className="relative">
             <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-blue-100 to-orange-100 p-8">
-              <img
-                src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80"
-                alt="Happy pets"
-                className="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-700"
-              />
+              <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80" alt="Happy pets" className="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-700" />
             </div>
             
             {/* Floating elements */}
@@ -69,6 +62,5 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
