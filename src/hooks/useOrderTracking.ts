@@ -28,6 +28,7 @@ interface OrderDetails {
   created_at: string;
   estimated_delivery_date: string | null;
   tracking_number: string | null;
+  user_id: string | null;
 }
 
 export const useOrderTracking = () => {
@@ -47,7 +48,15 @@ export const useOrderTracking = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setOrders(data || []);
+      
+      // Transform the data to match our OrderDetails interface
+      const transformedOrders: OrderDetails[] = (data || []).map(order => ({
+        ...order,
+        estimated_delivery_date: order.estimated_delivery_date || null,
+        tracking_number: order.tracking_number || null,
+      }));
+      
+      setOrders(transformedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
     } finally {
@@ -55,15 +64,17 @@ export const useOrderTracking = () => {
     }
   };
 
-  const fetchOrderStatusHistory = async (orderId: string) => {
+  const fetchOrderStatusHistory = async (orderId: string): Promise<OrderStatusHistory[]> => {
     try {
-      const { data, error } = await supabase
-        .from('order_status_history')
-        .select('*')
-        .eq('order_id', orderId)
-        .order('created_at', { ascending: true });
+      // Use a raw SQL query since the TypeScript types haven't been updated yet
+      const { data, error } = await supabase.rpc('get_order_status_history', {
+        order_id: orderId
+      });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching order status history:', error);
+        return [];
+      }
       return data || [];
     } catch (error) {
       console.error('Error fetching order status history:', error);
@@ -71,7 +82,7 @@ export const useOrderTracking = () => {
     }
   };
 
-  const trackOrderByNumber = async (orderNumber: string) => {
+  const trackOrderByNumber = async (orderNumber: string): Promise<OrderDetails | null> => {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
@@ -81,7 +92,15 @@ export const useOrderTracking = () => {
         .single();
 
       if (error) throw error;
-      return data;
+      
+      // Transform the data to match our OrderDetails interface
+      const transformedOrder: OrderDetails = {
+        ...data,
+        estimated_delivery_date: data.estimated_delivery_date || null,
+        tracking_number: data.tracking_number || null,
+      };
+      
+      return transformedOrder;
     } catch (error) {
       console.error('Error tracking order:', error);
       return null;
