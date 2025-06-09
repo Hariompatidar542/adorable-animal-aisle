@@ -75,21 +75,21 @@ export const OrderStatusTimeline: React.FC<OrderStatusTimelineProps> = ({
             {index < statusSteps.length - 1 && <div className={`absolute left-4 top-8 w-0.5 h-6 ${getConnectorClass(index)}`} />}
             
             {/* Status icon */}
-            <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 ${getStepClass(index)}`}>
+            <div className="bg-slate-50">
               {step.icon}
             </div>
             
             {/* Status content */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className={`text-sm font-medium ${index <= currentStatusIndex ? 'text-foreground' : 'text-muted-foreground'}`}>
+                <h4 className="">
                   {step.label}
                 </h4>
-                {getStatusDate(step.key) && <span className="text-xs text-muted-foreground">
+                {getStatusDate(step.key) && <span className="text-xs text-slate-900">
                     {getStatusDate(step.key)}
                   </span>}
               </div>
-              <p className={`text-xs mt-1 ${index <= currentStatusIndex ? 'text-muted-foreground' : 'text-muted-foreground/60'}`}>
+              <p className="text-slate-900">
                 {step.description}
               </p>
             </div>

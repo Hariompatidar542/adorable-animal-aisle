@@ -146,13 +146,13 @@ const OrderTracking = () => {
                         </div>
                         <div>
                           <p className="text-sm font-medium">Payment Method</p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-slate-900">
                             {order.payment_method === 'cod' ? 'Cash on Delivery' : 'Card Payment'}
                           </p>
                         </div>
                         <div>
                           <p className="text-sm font-medium">Delivery Address</p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-slate-900">
                             {order.address}, {order.city}
                           </p>
                         </div>
