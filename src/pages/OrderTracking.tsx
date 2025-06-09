@@ -128,7 +128,7 @@ const OrderTracking = () => {
                       <div className="flex justify-between items-start">
                         <div>
                           <CardTitle className="text-lg">Order #{order.order_number}</CardTitle>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-slate-900">
                             Placed on {new Date(order.created_at).toLocaleDateString()}
                           </p>
                         </div>
