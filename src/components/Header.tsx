@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ShoppingCart, User, LogOut, Settings, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -31,10 +30,13 @@ export const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <h1 className="text-3xl font-bold text-gradient cursor-pointer flex items-center gap-2" onClick={() => navigate('/')}>
-                <span className="text-2xl">🐾</span>
-                Zooland
-              </h1>
+              <div className="cursor-pointer" onClick={() => navigate('/')}>
+                <img 
+                  src="/lovable-uploads/cc069cbe-e7da-4bdf-8080-b56d5e072cf0.png" 
+                  alt="Zoo Land Kennel" 
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
             </div>
             
             <nav className="hidden md:flex space-x-8">
