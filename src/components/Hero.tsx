@@ -21,7 +21,7 @@ export const Hero = () => {
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 Everything Your
-                <span className="text-gradient block">Furry Friends</span>
+                <span className="text-gradient block text-neutral-400">Furry Friends</span>
                 <span className="text-orange-500">Deserve</span>
               </h1>
               
