@@ -21,14 +21,12 @@ export const Hero = () => {
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 Everything Your
-                <span className="text-gradient block text-neutral-400">Furry Friends</span>
-                <span className="text-orange-500">Deserve</span>
+                <span className="text-gradient block text-neutral-400"></span>
+                <span className="text-7xl text-lime-300">Furry Friends
+              </span>
               </h1>
               
-              <p className="text-xl max-w-lg text-gray-600 leading-relaxed">
-                Discover premium pet products crafted with love. From nutritious treats to cozy beds, 
-                we have everything to keep your pets happy and healthy.
-              </p>
+              <p className="max-w-lg leading-relaxed text-orange-400 text-7xl font-bold">Deserve</p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
