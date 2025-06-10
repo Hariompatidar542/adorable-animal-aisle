@@ -65,7 +65,7 @@ export const ProductList: React.FC<ProductListProps> = ({
               <div className="flex items-center gap-2">
                 <span className="font-bold text-lg text-primary">${product.price}</span>
                 {product.original_price && <span className="text-sm text-muted-foreground line-through">
-                    ${product.original_price}
+                    ₹{product.original_price}
                   </span>}
               </div>
               <div className="flex items-center gap-1">
