@@ -69,10 +69,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Enhanced Price */}
         <div className="flex items-center space-x-3">
           <span className="text-2xl font-bold text-purple-600">
-            ${product.price}
+            ₹{product.price}
           </span>
           {product.originalPrice && <span className="text-sm text-gray-400 line-through bg-gray-100 px-2 py-1 rounded-full">
-              ${product.originalPrice}
+              ₹{product.originalPrice}
             </span>}
         </div>
 
