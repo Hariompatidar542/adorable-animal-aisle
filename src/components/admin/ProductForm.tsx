@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ImageUpload } from '@/components/ui/image-upload';
+import { MultipleImageUpload } from '@/components/ui/multiple-image-upload';
 import { Product, ProductInput } from '@/hooks/useProducts';
 
 interface ProductFormProps {
@@ -47,7 +47,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-4xl mx-auto">
       <CardHeader>
         <CardTitle>{product ? 'Edit Product' : 'Add New Product'}</CardTitle>
       </CardHeader>
@@ -90,9 +90,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             />
           </div>
 
-          <ImageUpload
-            value={formData.image}
-            onChange={(value) => handleChange('image', value)}
+          {/* Multiple Image Upload */}
+          <MultipleImageUpload
+            productId={product?.id}
             disabled={isLoading}
           />
 

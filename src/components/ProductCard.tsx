@@ -6,6 +6,8 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import { Auth } from './Auth';
+import { ImageCarousel } from '@/components/ui/image-carousel';
+import { useProductImages } from '@/hooks/useProductImages';
 
 interface ProductCardProps {
   product: {
@@ -31,6 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const { addItem } = useCart();
   const { user } = useAuth();
   const [showAuth, setShowAuth] = useState(false);
+  const { images } = useProductImages(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -45,19 +48,30 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const discount = product.originalPrice ? Math.round((product.originalPrice - product.price) / product.originalPrice * 100) : 0;
 
+  // Use product images if available, otherwise fallback to the single image
+  const displayImages = images.length > 0 
+    ? images.map(img => img.image_url)
+    : [product.image];
+
   return (
     <>
       <Card className={`group cursor-pointer overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 bg-white rounded-3xl modern-shadow ${className}`} onClick={onClick} style={style}>
         <div className="relative overflow-hidden rounded-t-3xl">
-          <img src={product.image} alt={product.name} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+          <ImageCarousel
+            images={displayImages}
+            className="w-full h-48"
+            autoPlay={false}
+            showControls={true}
+            showDots={images.length > 1}
+          />
           
           {/* Enhanced Discount Badge */}
-          {discount > 0 && <div className="absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+          {discount > 0 && <div className="absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10">
               -{discount}%
             </div>}
           
           {/* Enhanced Wishlist Button */}
-          <Button variant="ghost" size="icon" className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full" onClick={e => e.stopPropagation()}>
+          <Button variant="ghost" size="icon" className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg rounded-full z-10" onClick={e => e.stopPropagation()}>
             <Heart className="w-4 h-4 hover:text-pink-500 transition-colors" />
           </Button>
 

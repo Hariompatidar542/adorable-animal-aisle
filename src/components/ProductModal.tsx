@@ -6,6 +6,8 @@ import { Card } from '@/components/ui/card';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Auth } from './Auth';
+import { ImageCarousel } from '@/components/ui/image-carousel';
+import { useProductImages } from '@/hooks/useProductImages';
 
 interface ProductModalProps {
   product: {
@@ -28,6 +30,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [showAuth, setShowAuth] = useState(false);
   const { addItem } = useCart();
   const { user } = useAuth();
+  const { images } = useProductImages(product.id);
 
   const handleAddToCart = () => {
     if (!user) {
@@ -42,6 +45,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
   const discount = product.originalPrice ? Math.round((product.originalPrice - product.price) / product.originalPrice * 100) : 0;
 
+  // Use product images if available, otherwise fallback to the single image
+  const displayImages = images.length > 0 
+    ? images.map(img => img.image_url)
+    : [product.image];
+
   return (
     <>
       <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 animate-fade-in">
@@ -52,17 +60,23 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </Button>
 
             <div className="grid md:grid-cols-2 gap-8 p-8 bg-slate-50">
-              {/* Product Image */}
+              {/* Product Images */}
               <div className="relative">
-                <img src={product.image} alt={product.name} className="w-full h-96 object-cover rounded-lg" />
-                {discount > 0 && <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <ImageCarousel
+                  images={displayImages}
+                  className="w-full h-96"
+                  autoPlay={true}
+                  showControls={true}
+                  showDots={true}
+                />
+                {discount > 0 && <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
                     -{discount}%
                   </div>}
               </div>
 
               {/* Product Details */}
               <div className="space-y-6">
-                <div className="bg-slate-300">
+                <div className="bg-slate-300 p-4 rounded-lg">
                   <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
                   
                   {/* Rating */}
