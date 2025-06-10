@@ -1,6 +1,8 @@
+
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
+
 export const Footer = () => {
-  return <footer className="bg-gray-50 pt-16 pb-8">
+  return <footer className="bg-gray-900 pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -9,75 +11,75 @@ export const Footer = () => {
               <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center">
                 <span className="font-bold text-lg text-yellow-300">🐾</span>
               </div>
-              <h3 className="text-xl font-bold text-amber-800">PetStore</h3>
+              <h3 className="text-xl font-bold text-white">PetStore</h3>
             </div>
-            <p className="text-slate-950">
+            <p className="text-gray-300 text-sm leading-relaxed">
               Your trusted partner in pet care. We provide premium products 
               to keep your furry friends happy and healthy.
             </p>
-            <div className="flex space-x-4 bg-slate-50">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-white text-sm">f</span>
+            <div className="flex space-x-4">
+              <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors cursor-pointer">
+                <span className="text-white text-sm font-medium">f</span>
               </div>
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-white text-sm">t</span>
+              <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors cursor-pointer">
+                <span className="text-white text-sm font-medium">t</span>
               </div>
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-white text-sm">in</span>
+              <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors cursor-pointer">
+                <span className="text-white text-sm font-medium">in</span>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Quick Links</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Shop All</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Dogs</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Cats</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Birds</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Fish</a></li>
+            <h4 className="font-semibold text-lg text-white">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Shop All</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Dogs</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Cats</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Birds</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Fish</a></li>
             </ul>
           </div>
 
           {/* Customer Service */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Customer Service</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Shipping Info</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Returns</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Size Guide</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
+            <h4 className="font-semibold text-lg text-white">Customer Service</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Contact Us</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Shipping Info</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Returns</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">Size Guide</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-purple-400 transition-colors text-sm">FAQ</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Contact Info</h4>
-            <div className="space-y-3 text-muted-foreground">
+            <h4 className="font-semibold text-lg text-white">Contact Info</h4>
+            <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4" />
-                <span>+1 (555) 123-4567</span>
+                <Phone className="w-4 h-4 text-purple-400" />
+                <span className="text-gray-300 text-sm">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4" />
-                <span>hello@petstore.com</span>
+                <Mail className="w-4 h-4 text-purple-400" />
+                <span className="text-gray-300 text-sm">hello@petstore.com</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4" />
-                <span>123 Pet Street, City, State 12345</span>
+                <MapPin className="w-4 h-4 text-purple-400" />
+                <span className="text-gray-300 text-sm">123 Pet Street, City, State 12345</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm">
+        <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-sm">
             © 2024 PetStore. All rights reserved.
           </p>
-          <div className="flex items-center space-x-1 text-sm text-muted-foreground mt-4 md:mt-0">
+          <div className="flex items-center space-x-1 text-sm text-gray-400 mt-4 md:mt-0">
             <span>Made with</span>
             <Heart className="w-4 h-4 text-red-500 fill-current" />
             <span>for pets</span>

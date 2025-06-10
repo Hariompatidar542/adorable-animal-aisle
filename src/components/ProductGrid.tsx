@@ -1,12 +1,16 @@
+
 import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { useProducts } from '@/hooks/useProducts';
 import { Sparkles } from 'lucide-react';
+
 const categories = ['All', 'Dogs', 'Cats', 'Birds', 'Fish'];
+
 interface ProductGridProps {
   onProductClick: (product: any) => void;
 }
+
 export const ProductGrid: React.FC<ProductGridProps> = ({
   onProductClick
 }) => {
@@ -16,14 +20,16 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     products,
     isLoading
   } = useProducts();
+
   const filteredProducts = activeCategory === 'All' ? products : products.filter(product => product.category === activeCategory);
   const displayedProducts = filteredProducts.slice(0, visibleProducts);
+
   if (isLoading) {
     return <section className="py-20 bg-gradient-to-b from-white to-purple-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Featured <span className="text-black-200">Products</span>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
+              Featured <span className="text-purple-600">Products</span>
             </h2>
             <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
               Discover our carefully curated selection of premium pet products, 
@@ -43,6 +49,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         </div>
       </section>;
   }
+
   return <section className="py-20 bg-gradient-to-b from-white to-purple-50">
       <div className="container mx-auto px-[16px]">
         <div className="text-center mb-16">
@@ -50,8 +57,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             <Sparkles className="w-4 h-4" />
             Premium Collection
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Featured <span className="text-gradient">Products</span>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
+            Featured <span className="text-purple-600">Products</span>
           </h2>
           <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
             Discover our carefully curated selection of premium pet products, 
@@ -64,7 +71,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           {categories.map(category => <Button key={category} variant={activeCategory === category ? "default" : "outline"} onClick={() => {
           setActiveCategory(category);
           setVisibleProducts(6);
-        }} className="text-slate-950 py-[6px] text-base px-[40px] rounded-md font-normal bg-slate-200 hover:bg-slate-100">
+        }} className="text-gray-800 py-[6px] text-base px-[40px] rounded-md font-medium bg-white hover:bg-gray-50 border border-gray-200">
               {category}
             </Button>)}
         </div>
@@ -86,7 +93,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
         {/* Enhanced Load More Button */}
         {visibleProducts < filteredProducts.length && <div className="text-center">
-            <Button variant="outline" size="lg" onClick={() => setVisibleProducts(prev => prev + 6)} className="border-purple-200 hover:border-purple-300 rounded-full px-8 py-3 font-medium transition-all duration-300 shadow-lg hover:shadow-xl bg-slate-200 hover:bg-slate-100">
+            <Button variant="outline" size="lg" onClick={() => setVisibleProducts(prev => prev + 6)} className="border-purple-200 hover:border-purple-300 rounded-full px-8 py-3 font-medium transition-all duration-300 shadow-lg hover:shadow-xl bg-white hover:bg-gray-50 text-gray-800">
               Load More Products
             </Button>
           </div>}
