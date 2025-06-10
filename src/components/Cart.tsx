@@ -63,7 +63,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                         <h4 className="font-medium line-clamp-2">{item.name}</h4>
                         <div className="flex items-center justify-between">
                           <span className="text-lg font-bold text-primary">
-                            ${item.price}
+                            ₹{item.price}
                           </span>
                           <Button
                             variant="ghost"
@@ -106,7 +106,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
             <div className="border-t p-6 space-y-4">
               <div className="flex justify-between items-center text-lg font-semibold">
                 <span>Total:</span>
-                <span className="text-primary">${total.toFixed(2)}</span>
+                <span className="text-primary">₹{total.toFixed(2)}</span>
               </div>
               <div className="space-y-2">
                 <Button 
