@@ -65,7 +65,7 @@ export const Cart: React.FC<CartProps> = ({
                         <div className="flex-1 space-y-2">
                           <h4 className="font-medium line-clamp-2">{item.name}</h4>
                           <div className="flex items-center justify-between">
-                            <span className="text-lg font-bold text-primary">
+                            <span className="text-lg font-bold text-slate-950">
                               ₹{item.price}
                             </span>
                             <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)} className="text-destructive hover:text-destructive">
@@ -73,11 +73,11 @@ export const Cart: React.FC<CartProps> = ({
                             </Button>
                           </div>
                           <div className="flex items-center space-x-3">
-                            <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-8 w-8">
+                            <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity - 1)} className="h-8 w-8 bg-slate-50">
                               <Minus className="w-3 h-3" />
                             </Button>
                             <span className="font-medium">{item.quantity}</span>
-                            <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-8 w-8">
+                            <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)} className="h-8 w-8 bg-slate-50">
                               <Plus className="w-3 h-3" />
                             </Button>
                           </div>
@@ -91,10 +91,10 @@ export const Cart: React.FC<CartProps> = ({
             {items.length > 0 && <div className="border-t p-6 space-y-4 bg-slate-50">
                 <div className="flex justify-between items-center text-lg font-semibold">
                   <span>Total:</span>
-                  <span className="text-primary">₹{total.toFixed(2)}</span>
+                  <span className="text-slate-950">₹{total.toFixed(2)}</span>
                 </div>
                 <div className="space-y-2">
-                  <Button onClick={handleCheckout} size="lg" className="w-full gradient-primary hover:opacity-90 text-slate-900">
+                  <Button onClick={handleCheckout} size="lg" className="w-full gradient-primary hover:opacity-90 text-slate-900 bg-slate-300 hover:bg-slate-200">
                     {user ? 'Checkout' : 'Sign In to Checkout'}
                   </Button>
                   <Button variant="outline" className="w-full" onClick={clearCart}>
