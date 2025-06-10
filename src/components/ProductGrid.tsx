@@ -64,7 +64,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           {categories.map(category => <Button key={category} variant={activeCategory === category ? "default" : "outline"} onClick={() => {
           setActiveCategory(category);
           setVisibleProducts(6);
-        }} className="text-slate-950 bg-teal-200 hover:bg-teal-50 bg-teal-50 py-[6px] text-base px-[40px] rounded-md font-normal">
+        }} className="text-slate-950 py-[6px] text-base px-[40px] rounded-md font-normal bg-slate-200 hover:bg-slate-100">
               {category}
             </Button>)}
         </div>
