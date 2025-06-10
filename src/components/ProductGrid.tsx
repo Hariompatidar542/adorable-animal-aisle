@@ -23,7 +23,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Featured <span className="text-gradient">Products</span>
+              Featured <span className="text-black-200">Products</span>
             </h2>
             <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
               Discover our carefully curated selection of premium pet products, 
