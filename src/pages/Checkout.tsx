@@ -249,7 +249,7 @@ const Checkout = () => {
               
 
               {/* Place Order Button */}
-              <Button type="submit" size="lg" disabled={isCreating} className="w-full gradient-primary hover:opacity-90 text-stone-100 bg-slate-800 hover:bg-slate-700">
+              <Button type="submit" size="lg" disabled={isCreating} className="w-full gradient-primary hover:opacity-90 bg-slate-800 hover:bg-slate-700 text-stone-300">
                 {isCreating ? 'Processing Order...' : 'Place Order'}
               </Button>
             </form>
