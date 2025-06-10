@@ -1,8 +1,6 @@
-
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
-
 export const Footer = () => {
-  return <footer className="bg-gray-900 pt-16 pb-8">
+  return <footer className="bg-gray-900 pt-16 pb-1 py py-[51px]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
