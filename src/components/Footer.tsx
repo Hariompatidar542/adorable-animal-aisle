@@ -7,7 +7,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🐾</span>
+                <span className="font-bold text-lg text-yellow-300">🐾</span>
               </div>
               <h3 className="text-xl font-bold text-amber-800">PetStore</h3>
             </div>
