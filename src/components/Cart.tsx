@@ -52,10 +52,10 @@ export const Cart: React.FC<CartProps> = ({
 
             {/* Cart Items */}
             <div className="flex-1 overflow-y-auto p-6 bg-slate-50">
-              {items.length === 0 ? <div className="text-center py-12">
+              {items.length === 0 ? <div className="text-center py-12 bg-slate-200">
                   <ShoppingBag className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">Your cart is empty</p>
-                  <Button onClick={onClose} className="mt-4 gradient-primary text-white">
+                  <Button onClick={onClose} className="mt-4 gradient-primary bg-slate-100 text-slate-900">
                     Continue Shopping
                   </Button>
                 </div> : <div className="space-y-4">
