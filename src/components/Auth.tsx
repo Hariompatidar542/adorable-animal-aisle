@@ -71,7 +71,7 @@ export const Auth: React.FC<AuthProps> = ({
   return <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md bg-slate-50">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-bold text-primary">
+          <DialogTitle className="text-center text-2xl font-bold text-slate-900">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
           </DialogTitle>
         </DialogHeader>
@@ -98,7 +98,7 @@ export const Auth: React.FC<AuthProps> = ({
             <input type="password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your password" minLength={6} />
           </div>
           
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" disabled={loading} className="w-full text-yellow-600">
             {loading ? <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 {isSignUp ? 'Creating Account...' : 'Signing In...'}
@@ -107,7 +107,7 @@ export const Auth: React.FC<AuthProps> = ({
         </form>
         
         <div className="text-center">
-          <button type="button" onClick={toggleMode} className="text-sm text-primary hover:underline">
+          <button type="button" onClick={toggleMode} className="text-sm hover:underline text-slate-900">
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
         </div>
