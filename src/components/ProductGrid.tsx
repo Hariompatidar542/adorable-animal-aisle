@@ -86,7 +86,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
         {/* Enhanced Load More Button */}
         {visibleProducts < filteredProducts.length && <div className="text-center">
-            <Button variant="outline" size="lg" onClick={() => setVisibleProducts(prev => prev + 6)} className="border-purple-200 hover:border-purple-300 hover:bg-purple-50 rounded-full px-8 py-3 font-medium transition-all duration-300 shadow-lg hover:shadow-xl">
+            <Button variant="outline" size="lg" onClick={() => setVisibleProducts(prev => prev + 6)} className="border-purple-200 hover:border-purple-300 rounded-full px-8 py-3 font-medium transition-all duration-300 shadow-lg hover:shadow-xl bg-slate-200 hover:bg-slate-100">
               Load More Products
             </Button>
           </div>}
