@@ -26,7 +26,7 @@ export const Hero = () => {
               </span>
               </h1>
               
-              <p className="max-w-lg leading-relaxed text-orange-400 text-7xl font-bold">Deserve</p>
+              <p className="max-w-lg leading-relaxed text-orange-400 font-bold py-0 my-0 text-7xl">Deserve</p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
