@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useOrders } from '@/hooks/useOrders';
@@ -15,7 +14,7 @@ import { toast } from '@/hooks/use-toast';
 
 const Checkout = () => {
   const { items, total, clearCart } = useCart();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { createOrder, isCreating } = useOrders();
   const navigate = useNavigate();
   
@@ -29,6 +28,35 @@ const Checkout = () => {
     paymentMethod: 'cod',
     notes: ''
   });
+
+  // Redirect to home if user is not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/');
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to access the checkout page.",
+        variant: "destructive"
+      });
+    }
+  }, [user, loading, navigate]);
+
+  // Show loading while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background py-16 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if user is not authenticated
+  if (!user) {
+    return null;
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
