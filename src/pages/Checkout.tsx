@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -11,21 +12,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, CreditCard, Truck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+
 const Checkout = () => {
-  const {
-    items,
-    total,
-    clearCart
-  } = useCart();
-  const {
-    user,
-    loading
-  } = useAuth();
-  const {
-    createOrder,
-    isCreating
-  } = useOrders();
+  const { items, total, clearCart } = useCart();
+  const { user, loading } = useAuth();
+  const { createOrder, isCreating } = useOrders();
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: user?.email || '',
     fullName: '',
@@ -51,30 +44,35 @@ const Checkout = () => {
 
   // Show loading while checking authentication
   if (loading) {
-    return <div className="min-h-screen bg-background py-16 flex items-center justify-center">
+    return (
+      <div className="min-h-screen bg-background py-16 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">Loading...</p>
         </div>
-      </div>;
+      </div>
+    );
   }
 
   // Don't render if user is not authenticated
   if (!user) {
     return null;
   }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
+
   const handlePaymentMethodChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       paymentMethod: value
     }));
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -98,8 +96,10 @@ const Checkout = () => {
       });
     }
   };
+
   if (items.length === 0) {
-    return <div className="min-h-screen bg-background py-16">
+    return (
+      <div className="min-h-screen bg-background py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
           <p className="text-muted-foreground mb-8">Add some items to your cart before checkout.</p>
@@ -107,9 +107,12 @@ const Checkout = () => {
             Continue Shopping
           </Button>
         </div>
-      </div>;
+      </div>
+    );
   }
-  return <div className="min-h-screen py-8 bg-slate-50">
+
+  return (
+    <div className="min-h-screen py-8 bg-slate-50">
       <div className="container mx-auto px-4 max-w-6xl bg-slate-50">
         <div className="mb-8">
           <Button variant="ghost" onClick={() => navigate('/')} className="mb-4">
@@ -127,7 +130,8 @@ const Checkout = () => {
                 <CardTitle>Order Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 bg-slate-200">
-                {items.map(item => <div key={item.id} className="flex items-center space-x-3 py-2 border-b">
+                {items.map(item => (
+                  <div key={item.id} className="flex items-center space-x-3 py-2 border-b">
                     <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-lg" />
                     <div className="flex-1">
                       <h4 className="font-medium">{item.name}</h4>
@@ -136,22 +140,23 @@ const Checkout = () => {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="font-semibold">₹{(item.price * item.quantity).toFixed(2)}</p>
                     </div>
-                  </div>)}
+                  </div>
+                ))}
                 
                 <div className="pt-4 space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>Subtotal:</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>₹{total.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Shipping:</span>
-                    <span>{formData.paymentMethod === 'cod' ? '$5.00' : 'Free'}</span>
+                    <span>{formData.paymentMethod === 'cod' ? '₹50.00' : 'Free'}</span>
                   </div>
                   <div className="flex justify-between text-lg font-bold border-t pt-2">
                     <span>Total:</span>
-                    <span>${(total + (formData.paymentMethod === 'cod' ? 5 : 0)).toFixed(2)}</span>
+                    <span>₹{(total + (formData.paymentMethod === 'cod' ? 50 : 0)).toFixed(2)}</span>
                   </div>
                 </div>
               </CardContent>
@@ -220,7 +225,7 @@ const Checkout = () => {
                         <Truck className="w-5 h-5 text-primary" />
                         <div>
                           <div className="font-medium">Cash on Delivery</div>
-                          <div className="text-sm text-muted-foreground bg-slate-200">Pay when your order arrives (+$5.00)</div>
+                          <div className="text-sm text-muted-foreground bg-slate-200">Pay when your order arrives (+₹50.00)</div>
                         </div>
                       </Label>
                     </div>
@@ -237,16 +242,15 @@ const Checkout = () => {
                     </div>
                   </RadioGroup>
 
-                  {formData.paymentMethod === 'card' && <div className="mt-4 p-4 bg-muted rounded-lg">
+                  {formData.paymentMethod === 'card' && (
+                    <div className="mt-4 p-4 bg-muted rounded-lg">
                       <p className="text-sm text-muted-foreground">
                         Card payment integration would be implemented here with Stripe or other payment processor.
                       </p>
-                    </div>}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
-
-              {/* Additional Notes */}
-              
 
               {/* Place Order Button */}
               <Button type="submit" size="lg" disabled={isCreating} className="w-full gradient-primary hover:opacity-90 bg-slate-800 hover:bg-slate-700 text-stone-300">
@@ -256,6 +260,8 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Checkout;

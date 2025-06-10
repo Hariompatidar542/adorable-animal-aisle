@@ -1,3 +1,4 @@
+
 import { X, Heart, ShoppingCart, Star, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { Auth } from './Auth';
+
 interface ProductModalProps {
   product: {
     id: number;
@@ -17,18 +19,16 @@ interface ProductModalProps {
   };
   onClose: () => void;
 }
+
 export const ProductModal: React.FC<ProductModalProps> = ({
   product,
   onClose
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showAuth, setShowAuth] = useState(false);
-  const {
-    addItem
-  } = useCart();
-  const {
-    user
-  } = useAuth();
+  const { addItem } = useCart();
+  const { user } = useAuth();
+
   const handleAddToCart = () => {
     if (!user) {
       setShowAuth(true);
@@ -39,8 +39,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     }
     onClose();
   };
+
   const discount = product.originalPrice ? Math.round((product.originalPrice - product.price) / product.originalPrice * 100) : 0;
-  return <>
+
+  return (
+    <>
       <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 animate-fade-in">
         <Card className="max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
           <div className="relative">
@@ -75,10 +78,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   {/* Price */}
                   <div className="flex items-center space-x-3 mb-6">
                     <span className="text-3xl font-bold text-slate-950">
-                      ${product.price}
+                      ₹{product.price}
                     </span>
                     {product.originalPrice && <span className="text-xl text-muted-foreground line-through">
-                        ${product.originalPrice}
+                        ₹{product.originalPrice}
                       </span>}
                   </div>
 
@@ -132,5 +135,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       </div>
 
       <Auth isOpen={showAuth} onClose={() => setShowAuth(false)} />
-    </>;
+    </>
+  );
 };
