@@ -53,7 +53,7 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
               Placed on {new Date(order.created_at).toLocaleDateString()} at {new Date(order.created_at).toLocaleTimeString()}
             </p>
           </div>
-          <Badge className={`${getStatusColor(order.status)} flex items-center gap-1`}>
+          <Badge className={`₹{getStatusColor(order.status)} flex items-center gap-1`}>
             {getStatusIcon(order.status)}
             {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
           </Badge>
@@ -69,15 +69,15 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <p className="text-sm font-medium">Subtotal</p>
-              <p className="text-lg">${order.subtotal.toFixed(2)}</p>
+              <p className="text-lg">₹{order.subtotal.toFixed(2)}</p>
             </div>
             <div>
               <p className="text-sm font-medium">Shipping</p>
-              <p className="text-lg">${order.shipping_cost.toFixed(2)}</p>
+              <p className="text-lg">₹{order.shipping_cost.toFixed(2)}</p>
             </div>
             <div>
               <p className="text-sm font-medium">Total</p>
-              <p className="text-lg font-semibold">${order.total.toFixed(2)}</p>
+              <p className="text-lg font-semibold">₹{order.total.toFixed(2)}</p>
             </div>
           </div>
         </div>
