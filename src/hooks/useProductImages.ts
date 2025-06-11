@@ -30,13 +30,20 @@ export const useProductImages = (productId?: number) => {
     queryFn: async () => {
       if (!productId) return [];
       
+      console.log('Fetching images for product:', productId);
+      
       const { data, error } = await supabase
         .from('product_images')
         .select('*')
         .eq('product_id', productId)
         .order('display_order', { ascending: true });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching product images:', error);
+        throw error;
+      }
+      
+      console.log('Fetched images:', data);
       return data as ProductImage[];
     },
     enabled: !!productId,
@@ -44,13 +51,20 @@ export const useProductImages = (productId?: number) => {
 
   const addImageMutation = useMutation({
     mutationFn: async (imageData: ProductImageInput) => {
+      console.log('Adding image:', imageData);
+      
       const { data, error } = await supabase
         .from('product_images')
         .insert(imageData)
         .select()
         .single();
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error adding image:', error);
+        throw error;
+      }
+      
+      console.log('Image added successfully:', data);
       return data;
     },
     onSuccess: () => {
@@ -72,12 +86,19 @@ export const useProductImages = (productId?: number) => {
 
   const deleteImageMutation = useMutation({
     mutationFn: async (imageId: string) => {
+      console.log('Deleting image:', imageId);
+      
       const { error } = await supabase
         .from('product_images')
         .delete()
         .eq('id', imageId);
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error deleting image:', error);
+        throw error;
+      }
+      
+      console.log('Image deleted successfully');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['product-images'] });
@@ -98,15 +119,30 @@ export const useProductImages = (productId?: number) => {
 
   const updateImageOrderMutation = useMutation({
     mutationFn: async ({ imageId, displayOrder }: { imageId: string; displayOrder: number }) => {
+      console.log('Updating image order:', { imageId, displayOrder });
+      
       const { error } = await supabase
         .from('product_images')
         .update({ display_order: displayOrder })
         .eq('id', imageId);
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating image order:', error);
+        throw error;
+      }
+      
+      console.log('Image order updated successfully');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['product-images'] });
+    },
+    onError: (error) => {
+      console.error('Error updating image order:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update image order. Please try again.",
+        variant: "destructive",
+      });
     },
   });
 
