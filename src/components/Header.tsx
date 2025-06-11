@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { ShoppingCart, User, LogOut, Settings, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useAdminAccess } from '@/hooks/useAdminAccess';
 import { Auth } from '@/components/Auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +15,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const { itemCount } = useCart();
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdminAccess();
   const [showAuth, setShowAuth] = useState(false);
   const navigate = useNavigate();
 
@@ -73,14 +76,16 @@ export const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
                       {user.user_metadata?.full_name || user.email}
                     </span>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleAdminClick}
-                    className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-full"
-                  >
-                    <Settings className="h-4 w-4" />
-                  </Button>
+                  {isAdmin && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleAdminClick}
+                      className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-full"
+                    >
+                      <Settings className="h-4 w-4" />
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
