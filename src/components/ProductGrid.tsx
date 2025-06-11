@@ -1,16 +1,12 @@
-
 import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { useProducts } from '@/hooks/useProducts';
 import { Sparkles } from 'lucide-react';
-
 const categories = ['All', 'Dogs', 'Cats'];
-
 interface ProductGridProps {
   onProductClick: (product: any) => void;
 }
-
 export const ProductGrid: React.FC<ProductGridProps> = ({
   onProductClick
 }) => {
@@ -20,10 +16,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     products,
     isLoading
   } = useProducts();
-
   const filteredProducts = activeCategory === 'All' ? products : products.filter(product => product.category === activeCategory);
   const displayedProducts = filteredProducts.slice(0, visibleProducts);
-
   if (isLoading) {
     return <section className="py-12 md:py-20 bg-gradient-to-b from-white to-purple-50 overflow-x-hidden">
         <div className="container mx-auto px-4">
@@ -49,7 +43,6 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         </div>
       </section>;
   }
-
   return <section className="py-12 md:py-20 bg-gradient-to-b from-white to-purple-50 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
@@ -71,7 +64,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           {categories.map(category => <Button key={category} variant={activeCategory === category ? "default" : "outline"} onClick={() => {
           setActiveCategory(category);
           setVisibleProducts(6);
-        }} className="text-gray-800 py-2 text-sm md:text-base px-4 md:px-8 rounded-md font-medium bg-white hover:bg-gray-50 border border-gray-200 flex-shrink-0">
+        }} className="text-gray-800 py-2 text-sm md:text-base px-4 md:px-8 rounded-md font-medium border border-gray-200 flex-shrink-0 bg-zinc-300 hover:bg-zinc-200">
               {category}
             </Button>)}
         </div>
