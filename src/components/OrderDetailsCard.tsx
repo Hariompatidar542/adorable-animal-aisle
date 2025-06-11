@@ -1,16 +1,15 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { OrderStatusTimeline } from '@/components/OrderStatusTimeline';
 import { Package, CreditCard, Truck, MapPin, Phone, Mail } from 'lucide-react';
-
 interface OrderDetailsCardProps {
   order: any;
 }
-
-export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => {
+export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({
+  order
+}) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -27,7 +26,6 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
         return 'bg-gray-100 text-gray-800';
     }
   };
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'pending':
@@ -42,10 +40,8 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
         return <Package className="w-4 h-4" />;
     }
   };
-
-  return (
-    <Card>
-      <CardHeader>
+  return <Card className="bg-slate-200">
+      <CardHeader className="bg-slate-200">
         <div className="flex justify-between items-start">
           <div>
             <CardTitle className="text-xl">Order #{order.order_number}</CardTitle>
@@ -59,7 +55,7 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 bg-slate-200">
         {/* Order Summary */}
         <div>
           <h3 className="font-medium mb-3 flex items-center gap-2">
@@ -93,15 +89,15 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm font-medium">Name</p>
-              <p className="text-sm text-muted-foreground">{order.full_name}</p>
+              <p className="text-sm text-slate-900">{order.full_name}</p>
             </div>
             <div>
               <p className="text-sm font-medium">Email</p>
-              <p className="text-sm text-muted-foreground">{order.email}</p>
+              <p className="text-sm text-slate-900">{order.email}</p>
             </div>
             <div>
               <p className="text-sm font-medium">Phone</p>
-              <p className="text-sm text-muted-foreground">{order.phone}</p>
+              <p className="text-sm text-slate-900">{order.phone}</p>
             </div>
           </div>
         </div>
@@ -117,52 +113,45 @@ export const OrderDetailsCard: React.FC<OrderDetailsCardProps> = ({ order }) => 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm font-medium">Address</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-slate-900">
                 {order.address}<br />
                 {order.city}, {order.postal_code}
               </p>
             </div>
             <div>
               <p className="text-sm font-medium">Payment Method</p>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
+              <p className="text-sm flex items-center gap-1 text-slate-900">
                 <CreditCard className="w-3 h-3" />
                 {order.payment_method === 'cod' ? 'Cash on Delivery' : 'Card Payment'}
               </p>
             </div>
           </div>
           
-          {order.tracking_number && (
-            <div className="mt-4">
+          {order.tracking_number && <div className="mt-4">
               <p className="text-sm font-medium">Tracking Number</p>
               <p className="text-sm text-muted-foreground font-mono">{order.tracking_number}</p>
-            </div>
-          )}
+            </div>}
           
-          {order.estimated_delivery_date && (
-            <div className="mt-4">
+          {order.estimated_delivery_date && <div className="mt-4">
               <p className="text-sm font-medium">Estimated Delivery</p>
               <p className="text-sm text-muted-foreground">
                 {new Date(order.estimated_delivery_date).toLocaleDateString()}
               </p>
-            </div>
-          )}
+            </div>}
         </div>
 
-        {order.notes && (
-          <>
+        {order.notes && <>
             <Separator />
             <div>
               <h3 className="font-medium mb-2">Special Instructions</h3>
               <p className="text-sm text-muted-foreground">{order.notes}</p>
             </div>
-          </>
-        )}
+          </>}
 
         <Separator />
 
         {/* Order Timeline */}
         <OrderStatusTimeline orderId={order.id} currentStatus={order.status} />
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
