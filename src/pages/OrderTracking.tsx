@@ -142,7 +142,7 @@ const OrderTracking = () => {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div>
                           <p className="text-sm font-medium">Total Amount</p>
-                          <p className="text-lg font-semibold">${order.total.toFixed(2)}</p>
+                          <p className="text-lg font-semibold">₹{order.total.toFixed(2)}</p>
                         </div>
                         <div>
                           <p className="text-sm font-medium">Payment Method</p>
