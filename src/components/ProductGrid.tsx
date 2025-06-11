@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useProducts } from '@/hooks/useProducts';
 import { Sparkles } from 'lucide-react';
 
-const categories = ['All', 'Dogs', 'Cats', 'Birds', 'Fish'];
+const categories = ['All', 'Dogs', 'Cats'];
 
 interface ProductGridProps {
   onProductClick: (product: any) => void;
