@@ -132,7 +132,7 @@ const OrderTracking = () => {
                             Placed on {new Date(order.created_at).toLocaleDateString()}
                           </p>
                         </div>
-                        <Badge className={`${getStatusColor(order.status)} flex items-center gap-1`}>
+                        <Badge className={`₹{getStatusColor(order.status)} flex items-center gap-1`}>
                           {getStatusIcon(order.status)}
                           {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                         </Badge>
