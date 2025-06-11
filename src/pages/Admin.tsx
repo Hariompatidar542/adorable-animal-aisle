@@ -100,7 +100,7 @@ const Admin = () => {
     setViewMode('list');
     setSelectedProduct(null);
   };
-  return <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-slate-50">
       <div className="container mx-auto px-4 py-8 bg-slate-50">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -119,11 +119,11 @@ const Admin = () => {
 
         {viewMode === 'list' ? <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="products" className="flex items-center gap-2 bg-slate-100">
+              <TabsTrigger value="products" className="flex items-center gap-2 bg-slate-50 text-slate-900">
                 <Package className="w-4 h-4" />
                 Products
               </TabsTrigger>
-              <TabsTrigger value="admin-access" className="flex items-center gap-2 bg-slate-100">
+              <TabsTrigger value="admin-access" className="flex items-center gap-2 bg-slate-100 text-slate-950">
                 <Users className="w-4 h-4" />
                 Admin Access
               </TabsTrigger>
