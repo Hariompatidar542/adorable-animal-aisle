@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,19 +8,17 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MultipleImageUpload } from '@/components/ui/multiple-image-upload';
 import { Product, ProductInput } from '@/hooks/useProducts';
-
 interface ProductFormProps {
   product?: Product;
   onSubmit: (data: ProductInput) => void;
   onCancel: () => void;
   isLoading?: boolean;
 }
-
 export const ProductForm: React.FC<ProductFormProps> = ({
   product,
   onSubmit,
   onCancel,
-  isLoading = false,
+  isLoading = false
 }) => {
   const [formData, setFormData] = useState<ProductInput>({
     name: product?.name || '',
@@ -34,43 +31,37 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     reviews: product?.reviews || 0,
     featured: product?.featured || false,
     in_stock: product?.in_stock ?? true,
-    stock_quantity: product?.stock_quantity || 0,
+    stock_quantity: product?.stock_quantity || 0
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
   };
-
   const handleChange = (field: keyof ProductInput, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
-  return (
-    <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader>
+  return <Card className="w-full max-w-4xl mx-auto">
+      <CardHeader className="bg-slate-100">
         <CardTitle>{product ? 'Edit Product' : 'Add New Product'}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="bg-slate-100">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Product Name *</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => handleChange('name', e.target.value)}
-                required
-              />
+              <Input id="name" value={formData.name} onChange={e => handleChange('name', e.target.value)} required className="bg-slate-50" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="category">Category *</Label>
-              <Select value={formData.category} onValueChange={(value) => handleChange('category', value)}>
+              <Select value={formData.category} onValueChange={value => handleChange('category', value)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-slate-50">
                   <SelectItem value="Dogs">Dogs</SelectItem>
                   <SelectItem value="Cats">Cats</SelectItem>
                   <SelectItem value="Birds">Birds</SelectItem>
@@ -82,103 +73,56 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => handleChange('description', e.target.value)}
-              rows={3}
-            />
+            <Textarea id="description" value={formData.description} onChange={e => handleChange('description', e.target.value)} rows={3} className="bg-slate-50" />
           </div>
 
           {/* Multiple Image Upload */}
-          <MultipleImageUpload
-            productId={product?.id}
-            disabled={isLoading}
-          />
+          <MultipleImageUpload productId={product?.id} disabled={isLoading} />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="price">Price *</Label>
-              <Input
-                id="price"
-                type="number"
-                step="0.01"
-                value={formData.price}
-                onChange={(e) => handleChange('price', parseFloat(e.target.value) || 0)}
-                required
-              />
+              <Input id="price" type="number" step="0.01" value={formData.price} onChange={e => handleChange('price', parseFloat(e.target.value) || 0)} required className="bg-slate-50" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="original_price">Original Price</Label>
-              <Input
-                id="original_price"
-                type="number"
-                step="0.01"
-                value={formData.original_price || ''}
-                onChange={(e) => handleChange('original_price', e.target.value ? parseFloat(e.target.value) : undefined)}
-              />
+              <Input id="original_price" type="number" step="0.01" value={formData.original_price || ''} onChange={e => handleChange('original_price', e.target.value ? parseFloat(e.target.value) : undefined)} className="bg-slate-50" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="stock_quantity">Stock Quantity</Label>
-              <Input
-                id="stock_quantity"
-                type="number"
-                value={formData.stock_quantity}
-                onChange={(e) => handleChange('stock_quantity', parseInt(e.target.value) || 0)}
-              />
+              <Input id="stock_quantity" type="number" value={formData.stock_quantity} onChange={e => handleChange('stock_quantity', parseInt(e.target.value) || 0)} className="bg-slate-50" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="rating">Rating (0-5)</Label>
-              <Input
-                id="rating"
-                type="number"
-                step="0.1"
-                min="0"
-                max="5"
-                value={formData.rating}
-                onChange={(e) => handleChange('rating', parseFloat(e.target.value) || 0)}
-              />
+              <Input id="rating" type="number" step="0.1" min="0" max="5" value={formData.rating} onChange={e => handleChange('rating', parseFloat(e.target.value) || 0)} className="bg-slate-50" />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="reviews">Reviews Count</Label>
-              <Input
-                id="reviews"
-                type="number"
-                value={formData.reviews}
-                onChange={(e) => handleChange('reviews', parseInt(e.target.value) || 0)}
-              />
+              <Input id="reviews" type="number" value={formData.reviews} onChange={e => handleChange('reviews', parseInt(e.target.value) || 0)} className="bg-slate-50" />
             </div>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Switch
-                id="featured"
-                checked={formData.featured}
-                onCheckedChange={(checked) => handleChange('featured', checked)}
-              />
+              <Switch id="featured" checked={formData.featured} onCheckedChange={checked => handleChange('featured', checked)} />
               <Label htmlFor="featured">Featured Product</Label>
             </div>
 
             <div className="flex items-center space-x-2">
-              <Switch
-                id="in_stock"
-                checked={formData.in_stock}
-                onCheckedChange={(checked) => handleChange('in_stock', checked)}
-              />
+              <Switch id="in_stock" checked={formData.in_stock} onCheckedChange={checked => handleChange('in_stock', checked)} />
               <Label htmlFor="in_stock">In Stock</Label>
             </div>
           </div>
 
           <div className="flex gap-4 pt-4">
             <Button type="submit" disabled={isLoading} className="flex-1">
-              {isLoading ? 'Saving...' : (product ? 'Update Product' : 'Create Product')}
+              {isLoading ? 'Saving...' : product ? 'Update Product' : 'Create Product'}
             </Button>
             <Button type="button" variant="outline" onClick={onCancel} className="flex-1">
               Cancel
@@ -186,6 +130,5 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           </div>
         </form>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
