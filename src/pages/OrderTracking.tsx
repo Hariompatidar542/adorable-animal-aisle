@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useOrderTracking } from '@/hooks/useOrderTracking';
@@ -12,16 +11,19 @@ import { ArrowLeft, Package, Search, Truck, CheckCircle, Clock } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import { OrderStatusTimeline } from '@/components/OrderStatusTimeline';
 import { OrderDetailsCard } from '@/components/OrderDetailsCard';
-
 const OrderTracking = () => {
-  const { user } = useAuth();
-  const { orders, isLoading, trackOrderByNumber } = useOrderTracking();
+  const {
+    user
+  } = useAuth();
+  const {
+    orders,
+    isLoading,
+    trackOrderByNumber
+  } = useOrderTracking();
   const navigate = useNavigate();
-  
   const [orderNumber, setOrderNumber] = useState('');
   const [trackedOrder, setTrackedOrder] = useState(null);
   const [searchLoading, setSearchLoading] = useState(false);
-
   const handleTrackOrder = async () => {
     if (!orderNumber.trim()) return;
     setSearchLoading(true);
@@ -29,7 +31,6 @@ const OrderTracking = () => {
     setTrackedOrder(order);
     setSearchLoading(false);
   };
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'pending':
@@ -44,7 +45,6 @@ const OrderTracking = () => {
         return <Clock className="w-4 h-4" />;
     }
   };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -61,9 +61,7 @@ const OrderTracking = () => {
         return 'bg-gray-100 text-gray-800';
     }
   };
-
-  return (
-    <div className="min-h-screen py-4 md:py-8 bg-slate-50 overflow-x-hidden">
+  return <div className="min-h-screen py-4 md:py-8 bg-slate-50 overflow-x-hidden">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-6 md:mb-8">
           <Button variant="ghost" onClick={() => navigate('/')} className="mb-4 text-sm md:text-base">
@@ -85,21 +83,10 @@ const OrderTracking = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <Label htmlFor="orderNumber" className="text-sm md:text-base">Order Number</Label>
-                <Input 
-                  id="orderNumber" 
-                  placeholder="Enter your order number (e.g., ORD-20241209-1234)" 
-                  value={orderNumber} 
-                  onChange={e => setOrderNumber(e.target.value)} 
-                  onKeyPress={e => e.key === 'Enter' && handleTrackOrder()} 
-                  className="bg-slate-50 text-sm md:text-base" 
-                />
+                <Input id="orderNumber" placeholder="Enter your order number (e.g., ORD-20241209-1234)" value={orderNumber} onChange={e => setOrderNumber(e.target.value)} onKeyPress={e => e.key === 'Enter' && handleTrackOrder()} className="bg-slate-50 text-sm md:text-base" />
               </div>
               <div className="flex items-end">
-                <Button 
-                  onClick={handleTrackOrder} 
-                  disabled={searchLoading || !orderNumber.trim()} 
-                  className="gradient-primary text-slate-900 w-full sm:w-auto text-sm md:text-base"
-                >
+                <Button onClick={handleTrackOrder} disabled={searchLoading || !orderNumber.trim()} className="gradient-primary text-slate-900 w-full sm:w-auto text-sm md:text-base">
                   {searchLoading ? 'Tracking...' : 'Track Order'}
                 </Button>
               </div>
@@ -108,46 +95,35 @@ const OrderTracking = () => {
         </Card>
 
         {/* Tracked Order Result */}
-        {trackedOrder && (
-          <div className="mb-6 md:mb-8">
+        {trackedOrder && <div className="mb-6 md:mb-8">
             <h2 className="text-xl md:text-2xl font-semibold mb-4">Order Details</h2>
             <OrderDetailsCard order={trackedOrder} />
-          </div>
-        )}
+          </div>}
 
-        {trackedOrder === null && orderNumber && !searchLoading && (
-          <Card className="mb-6 md:mb-8">
-            <CardContent className="py-6 md:py-8 text-center">
-              <p className="text-muted-foreground text-sm md:text-base">
+        {trackedOrder === null && orderNumber && !searchLoading && <Card className="mb-6 md:mb-8">
+            <CardContent className="py-6 md:py-8 text-center bg-slate-200">
+              <p className="text-sm md:text-base text-orange-800 font-medium">
                 No order found with number "{orderNumber}". Please check your order number and try again.
               </p>
             </CardContent>
-          </Card>
-        )}
+          </Card>}
 
         {/* User's Orders (if logged in) */}
-        {user && (
-          <div>
+        {user && <div>
             <h2 className="text-xl md:text-2xl font-semibold mb-4">Your Orders</h2>
-            {isLoading ? (
-              <Card>
+            {isLoading ? <Card>
                 <CardContent className="py-6 md:py-8 text-center">
                   <p className="text-muted-foreground text-sm md:text-base">Loading your orders...</p>
                 </CardContent>
-              </Card>
-            ) : orders.length === 0 ? (
-              <Card>
+              </Card> : orders.length === 0 ? <Card>
                 <CardContent className="py-6 md:py-8 text-center">
                   <p className="text-muted-foreground text-sm md:text-base mb-4">You haven't placed any orders yet.</p>
                   <Button onClick={() => navigate('/')} className="gradient-primary text-white text-sm md:text-base">
                     Start Shopping
                   </Button>
                 </CardContent>
-              </Card>
-            ) : (
-              <div className="space-y-4">
-                {orders.map(order => (
-                  <Card key={order.id}>
+              </Card> : <div className="space-y-4">
+                {orders.map(order => <Card key={order.id}>
                     <CardHeader className="pb-3 bg-slate-200">
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                         <div>
@@ -182,26 +158,20 @@ const OrderTracking = () => {
                         </div>
                       </div>
                       
-                      {order.tracking_number && (
-                        <div className="mb-4">
+                      {order.tracking_number && <div className="mb-4">
                           <p className="text-xs md:text-sm font-medium">Tracking Number</p>
                           <p className="text-xs md:text-sm text-muted-foreground font-mono break-all">{order.tracking_number}</p>
-                        </div>
-                      )}
+                        </div>}
                       
                       <Separator className="my-4" />
                       <OrderStatusTimeline orderId={order.id} currentStatus={order.status} />
                     </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+                  </Card>)}
+              </div>}
+          </div>}
 
         {/* Login prompt for guest users */}
-        {!user && (
-          <Card>
+        {!user && <Card>
             <CardContent className="py-6 md:py-8 text-center">
               <p className="text-muted-foreground mb-4 text-sm md:text-base px-4">
                 Sign in to view all your orders and get personalized tracking updates.
@@ -210,11 +180,8 @@ const OrderTracking = () => {
                 Sign In
               </Button>
             </CardContent>
-          </Card>
-        )}
+          </Card>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default OrderTracking;
